@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dcits.odps.entity.Odps;
-import com.dcits.odps.mapper.query.OdpsQueryMapper;
 import com.dcits.odps.service.OdpsService;
 /**
  * 
@@ -14,6 +14,7 @@ import com.dcits.odps.service.OdpsService;
  *
  */
 @Service
+
 public class OdpsServiceImpl implements OdpsService{
 
 	@Autowired
@@ -36,6 +37,7 @@ public class OdpsServiceImpl implements OdpsService{
 	}
 
 	@Override
+	@Transactional(value="updateTransactionManager")//多数据源事务
 	public int insertOdps(Odps odps) {
 		return odpsUpdateMapper.insertOdps(odps);
 	}
