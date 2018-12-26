@@ -36,6 +36,8 @@ public class DataSourceUpdateConfig {
 
 	    @Bean(name = "updateSqlSessionTemplate")
 	    public SqlSessionTemplate testSqlSessionTemplate(@Qualifier("updateSqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
-	        return new SqlSessionTemplate(sqlSessionFactory);
+	    	SqlSessionTemplate tmp = new SqlSessionTemplate(sqlSessionFactory);
+	    	tmp.getConfiguration().setMapUnderscoreToCamelCase(true);
+	    	return tmp;
 	    }
 }

@@ -42,6 +42,8 @@ public class DataSourceQueryConfig {
     @Bean(name = "querySqlSessionTemplate")
     @Primary
     public SqlSessionTemplate testSqlSessionTemplate(@Qualifier("querySqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
-        return new SqlSessionTemplate(sqlSessionFactory);
+    	SqlSessionTemplate tmp = new SqlSessionTemplate(sqlSessionFactory);
+    	tmp.getConfiguration().setMapUnderscoreToCamelCase(true);
+    	return tmp;
     }
 }
