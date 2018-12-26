@@ -1,0 +1,6 @@
+com/dcits/odps/entity/Odps.class
+com/dcits/odps/service/impl/OdpsServiceImpl.class
+com/dcits/odps/mapper/OdpsMapper.class
+com/dcits/odps/Application.class
+com/dcits/odps/controller/OdpsController.class
+com/dcits/odps/service/OdpsService.class

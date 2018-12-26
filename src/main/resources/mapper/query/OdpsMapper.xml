@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dcits.odps.mapper.query.OdpsQueryMapper">
+ 
+  
+  <select id="findOdpsTree" parameterType="String" resultType="com.dcits.odps.entity.Odps">
+    select objid,objpid,name,type  from odps where   objpid=#{pid}
+    and lotno =#{lotno}
+  </select>
+  
+  <select id="findOdpsLotno" resultType="java.lang.Integer">
+    select case when c=0 then 0 else lotno end lotno  from 
+      ( select max(lotno) lotno,count(lotno) c from odps ) a
+  </select>
+  
+  <select id="findOdpsContent" parameterType="String" resultType="com.dcits.odps.entity.Odps">
+    select *  from odps where objpid=#{pid}
+    and lotno = #{lotno}
+  </select>
+  
+  <insert id="insertOdps" parameterType="com.dcits.odps.entity.Odps" >
+   	 insert into odps (objid,objpid,name,type,lotno,content) 
+     values(#{objid},#{objpid},#{name},#{type},#{lotno},#{content})
+  </insert>
+
+  <select id="findTopLotno" resultType="com.dcits.odps.entity.Odps">
+    SELECT lotno,MAX(createdate) createdate FROM odps GROUP BY(lotno) ORDER BY(lotno) DESC LIMIT 100
+  </select>
+ 
+ 
+</mapper>
